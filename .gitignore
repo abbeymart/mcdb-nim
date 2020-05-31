@@ -1,0 +1,6 @@
+project.md
+*.exe
+mcdb.exe
+dbconnect.exe
+
+config/secure
