@@ -17,11 +17,11 @@ type
     Database* = ref object
         db*: DbConn
 
-    SecureType* = object
+    DbSecureType* = object
         secureAccess*: bool
         secureCert*: string
         secureKey*: string
-    OptionType* = object
+    DbOptionType* = object
         fileName*: string
         hostName*: string
         hostUrl*: string
@@ -31,18 +31,18 @@ type
         port*: uint
         dbType*: string
         poolSize*: uint
-        secureOption*: SecureType
+        secureOption*: DbSecureType
 
-var defaultSecureOption = SecureType(secureAccess: false)
+var defaultSecureOption = DbSecureType(secureAccess: false)
 
-var defaultOptions = OptionType(fileNaMe: "testdb.db", hostName: "localhost",
+var defaultOptions = DbOptionType(fileNaMe: "testdb.db", hostName: "localhost",
                                 hostUrl: "localhost:5432",
                                 userName: "abbeymart", password: "ab12trust",
                                 dbName: "mccentral", port: 5432,
                                 dbType: "postgres", poolSize: 20,
                                 secureOption: defaultSecureOption )
 # database constructor
-proc newDatabase*(options: OptionType = defaultOptions): Database =
+proc newDatabase*(options: DbOptionType = defaultOptions): Database =
     new result
     case options.dbType
     of ["postgres"]:
