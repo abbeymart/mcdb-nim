@@ -64,6 +64,7 @@ when isMainModule:
     let dbConnect = newDatabase()
     # echo "db-response-status: ", dbConnect.db.status
     doAssert $dbConnect.db.status ==  "CONNECTION_OK"
-    dbConnect.db.close()
+    # dbConnect.db.close()
+    dbConnect.close()
   except:
     echo "error opening DB Connection: ", getCurrentExceptionMsg()
