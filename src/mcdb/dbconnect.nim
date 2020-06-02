@@ -56,10 +56,14 @@ proc newDatabase*(options: DbOptionType = defaultOptions): Database =
     of ["sqlite"]:
       result.db = open(options.fileName, "", "", "")
 
+proc close*(database: Database) =
+    database.db.close()
+
 when isMainModule:
   try:
     let dbConnect = newDatabase()
-    echo "db-response-status: ", dbConnect.db.status
+    # echo "db-response-status: ", dbConnect.db.status
+    doAssert $dbConnect.db.status ==  "CONNECTION_OK"
     dbConnect.db.close()
   except:
     echo "error opening DB Connection: ", getCurrentExceptionMsg()
