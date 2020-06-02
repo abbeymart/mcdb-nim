@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.1"
+version       = "0.1.2"
 author        = "Abi Akindele [abbeymart]"
 description   = "mcdb - Db connection for postgres, mysql and sqlite"
 license       = "MIT"
