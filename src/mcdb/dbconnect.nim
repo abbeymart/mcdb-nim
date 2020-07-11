@@ -35,11 +35,15 @@ type
 
 var defaultSecureOption = DbSecureType(secureAccess: false)
 
-var defaultOptions = DbOptionType(fileNaMe: "testdb.db", hostName: "localhost",
+var defaultOptions = DbOptionType(fileName: "testdb.db",
+                                hostName: "localhost",
                                 hostUrl: "localhost:5432",
-                                userName: "abbeymart", password: "ab12trust",
-                                dbName: "mccentral", port: 5432,
-                                dbType: "postgres", poolSize: 20,
+                                userName: "abbeymart",
+                                password: "ab12trust",
+                                dbName: "mccentral",
+                                port: 5432,
+                                dbType: "postgres",
+                                poolSize: 20,
                                 secureOption: defaultSecureOption )
 # database constructor
 proc newDatabase*(options: DbOptionType = defaultOptions): Database =
@@ -55,6 +59,8 @@ proc newDatabase*(options: DbOptionType = defaultOptions): Database =
       result.db = open(options.hostName, options.userName, options.password, options.dbName)
     of ["sqlite"]:
       result.db = open(options.fileName, "", "", "")
+    else:
+      raise newException(DbError, "Unknown db-type: unable to establish db connection. ")
 
 proc close*(database: Database) =
     database.db.close()
